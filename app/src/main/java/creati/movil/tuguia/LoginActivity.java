@@ -1,37 +1,71 @@
 package creati.movil.tuguia;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity {
+import creati.movil.tuguia.models.Usuario;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button register, login;
+    TextInputLayout usr, pass;
+    View table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        register = (Button) findViewById(R.id.btn_register);
+        login = (Button) findViewById(R.id.btn_login);
+
+        usr = (TextInputLayout) findViewById(R.id.edit_usr);
+        pass = (TextInputLayout) findViewById(R.id.edit_pass);
+
+        table = findViewById(R.id.table);
+
+        Usuario.init(this);
+
+        register.setOnClickListener(this);
+        login.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onClick(View v) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (v.getId()){
+            case R.id.btn_login:
+                validateUsuario();
+                break;
+            case R.id.btn_register:
+                Snackbar.make(table, "Conexion no disponible", Snackbar.LENGTH_LONG)
+                        .setAction("Reintentar", this).show();
+                break;
         }
 
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void validateUsuario() {
+        String usrTxt = usr.getEditText().getText().toString();
+        String passTxt = pass.getEditText().getText().toString();
+
+        Usuario usuario = Usuario.findUsuarioByUsrAndPass(usrTxt, passTxt);
+
+        if(usuario == null){
+            pass.setErrorEnabled(true);
+            pass.setError(getString(R.string.login_error));
+        }else{
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
     }
 }
