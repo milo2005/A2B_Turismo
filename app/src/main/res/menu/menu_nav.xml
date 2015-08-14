@@ -31,8 +31,13 @@
         android:title="Perfil"
         >
         <menu>
-            <item android:title="Editar"/>
-            <item android:title="Cerrar Sesion"/>
+            <item
+                android:id="@+id/nav_edit"
+                android:title="Editar"/>
+
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Cerrar Sesion"/>
         </menu>
     </item>
 
