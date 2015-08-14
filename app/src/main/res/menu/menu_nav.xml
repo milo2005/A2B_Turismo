@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_inicio"
+        android:title="Inicio"
+        android:icon="@android:drawable/ic_menu_mylocation"/>
+
+    <item
+        android:id="@+id/nav_lugar"
+        android:title="Lugares"
+        android:icon="@android:drawable/ic_menu_myplaces"/>
+
+    <item
+        android:id="@+id/nav_restaurantes"
+        android:title="Restaurantes"
+        android:icon="@android:drawable/ic_menu_crop"/>
+
+    <item
+        android:id="@+id/nav_museos"
+        android:title="Museos"
+        android:icon="@android:drawable/ic_menu_gallery"/>
+
+    <item
+        android:id="@+id/nav_bares"
+        android:title="Bares"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        />
+
+    <item
+        android:title="Perfil"
+        >
+        <menu>
+            <item android:title="Editar"/>
+            <item android:title="Cerrar Sesion"/>
+        </menu>
+    </item>
+
+</menu>

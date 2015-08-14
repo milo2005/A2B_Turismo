@@ -29,16 +29,23 @@
                 android:src="@android:drawable/ic_menu_compass"
                 app:fabSize="normal"
                 android:layout_gravity="bottom|right"
-
-
                 />
 
 
 
         </FrameLayout>
 
-        
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start"
+            app:menu="@menu/menu_nav"
+            />
+
     </android.support.v4.widget.DrawerLayout>
 
 
 </LinearLayout>
+
