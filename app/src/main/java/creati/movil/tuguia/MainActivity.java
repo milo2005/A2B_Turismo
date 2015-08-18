@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.net.URI;
 
@@ -61,7 +63,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Uri uriUsr = Uri.parse(preferences.getString(AppUtil.KEY_USR_IMG, ""));
         Uri uriBanner  = Uri.parse(preferences.getString(AppUtil.KEY_USR_IMG_BANNER,""));
 
-        Picasso.with(this).load(uriUsr).into(usrImg);
+        Transformation rounded = new RoundedTransformationBuilder()
+                .oval(true).build();
+
+        Picasso.with(this).load(uriUsr).transform(rounded).into(usrImg);
         Picasso.with(this).load(uriBanner).into(bannerImg);
 
 
