@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +21,10 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.net.URI;
+import java.util.List;
 
+import creati.movil.tuguia.adapters.SitioAdapter;
+import creati.movil.tuguia.models.Sitio;
 import creati.movil.tuguia.util.AppUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
@@ -35,10 +40,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ActionBarDrawerToggle toggle;
 
+    RecyclerView list;
+    SitioAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Sitio.init(this);
+
+        list = (RecyclerView) findViewById(R.id.list);
+        List<Sitio> data = Sitio.listAll(Sitio.class);
+        adapter = new SitioAdapter(this, data);
+
+        list.setAdapter(adapter);
+        list.setLayoutManager(new LinearLayoutManager(this));
 
         preferences = getSharedPreferences(AppUtil.PREFERENCE_NAME, MODE_PRIVATE);
         editor = preferences.edit();
