@@ -18,10 +18,17 @@ import creati.movil.tuguia.models.Sitio;
 /**
  * Created by Dario Chamorro on 18/08/2015.
  */
-public class SitioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SitioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+
+    public interface OnItemClick{
+        void onItemClick(int position);
+    }
 
     Context context;
     List<Sitio> data;
+
+    OnItemClick onItemClick;
+    RecyclerView recyclerView;
 
     public SitioAdapter(Context context, List<Sitio> data) {
         this.context = context;
@@ -33,9 +40,11 @@ public class SitioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         RecyclerView.ViewHolder holder = null;
         if(viewType == Sitio.LUGAR){
             View v = View.inflate(context, R.layout.template_lugar, null);
+            v.setOnClickListener(this);
             holder = new LugarViewHolder(v);
         }else{
             View v = View.inflate(context, R.layout.template_restaurante, null);
+            v.setOnClickListener(this);
             holder = new RestauranteViewHolder(v);
         }
         return holder;
@@ -78,6 +87,17 @@ public class SitioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         return data.get(position).getTipo();
+    }
+
+    public void setOnItemClick(RecyclerView recyclerView, OnItemClick onItemClick){
+        this.recyclerView = recyclerView;
+        this.onItemClick = onItemClick;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int position = recyclerView.getChildAdapterPosition(v);
+        onItemClick.onItemClick(position);
     }
 
     //region ViewHolders

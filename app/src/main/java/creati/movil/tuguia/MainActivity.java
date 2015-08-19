@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -27,7 +28,7 @@ import creati.movil.tuguia.adapters.SitioAdapter;
 import creati.movil.tuguia.models.Sitio;
 import creati.movil.tuguia.util.AppUtil;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener, SitioAdapter.OnItemClick {
 
     ImageView usrImg,bannerImg;
     TextView usrTxt;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list = (RecyclerView) findViewById(R.id.list);
         List<Sitio> data = Sitio.listAll(Sitio.class);
         adapter = new SitioAdapter(this, data);
+        adapter.setOnItemClick(list, this);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));
@@ -148,4 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, "Selecionaste la posicion "+position, Toast.LENGTH_SHORT)
+                .show();
+    }
 }
