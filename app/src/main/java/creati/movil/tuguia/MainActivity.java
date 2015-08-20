@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SwipeRefreshLayout refresh;
     FloatingActionButton fab;
 
+    List<Sitio> data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(this);
 
         list = (RecyclerView) findViewById(R.id.list);
-        List<Sitio> data = Sitio.listAll(Sitio.class);
+        data = Sitio.listAll(Sitio.class);
         adapter = new SitioAdapter(this, data);
         adapter.setOnItemClick(list, this);
 
@@ -166,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.KEY_ID, data.get(position).getId());
         startActivity(intent);
     }
 
