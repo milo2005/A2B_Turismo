@@ -10,4 +10,7 @@
     <string name="open_drawer">Menu lateral abierto</string>
     <string name="close_drawer">Menu lateral cerrado</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="detail_content">Popayán es una ciudad colombiana, capital del departamento del Cauca, que se encuentra localizada en el valle de Pubenza, entre la Cordillera Occidental y Central al occidente del país. Tiene 277 540 habitantes, de acuerdo a las proyecciones para el 2015 del censo del DANE (Departamento Administrativo Nacional de Estadísticas) elaborado en el año 2005.4 Su extensión territorial es de 512 km², su altitud media es de 1760 m sobre el nivel del mar, su precipitación media anual de 1.941 mm, su temperatura promedio de 14/19 °C y dista aproximadamente 600 km de Bogotá. Es una de las ciudades más antiguas y mejor conservadas de América, lo que se ve reflejado en su arquitectura y tradiciones religiosas.
+
+En el 2005, la UNESCO designó a la ciudad de Popayán como Ciudad Unesco de la Gastronomía por su variedad y significado para el patrimonio intangible de los colombianos. La cocina caucana fue seleccionada por mantener sus métodos tradicionales de preparación a través de la tradición oral.10 11 El 28 de septiembre de 2009 las Procesiones de Semana Santa de Popayán fueron declaradas por la UNESCO como Obra Maestra del Patrimonio Oral e Inmaterial de la Humanidad.</string>
 </resources>
