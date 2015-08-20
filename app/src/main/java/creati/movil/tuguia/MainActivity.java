@@ -3,8 +3,10 @@ package creati.movil.tuguia;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +30,7 @@ import creati.movil.tuguia.adapters.SitioAdapter;
 import creati.movil.tuguia.models.Sitio;
 import creati.movil.tuguia.util.AppUtil;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener, SitioAdapter.OnItemClick {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener, SitioAdapter.OnItemClick, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     ImageView usrImg,bannerImg;
     TextView usrTxt;
@@ -44,11 +46,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView list;
     SitioAdapter adapter;
 
+    SwipeRefreshLayout refresh;
+    FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Sitio.init(this);
+
+        refresh = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        refresh.setColorSchemeResources(R.color.primary, R.color.primaryDark
+                , R.color.accent);
+        refresh.setOnRefreshListener(this);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         list = (RecyclerView) findViewById(R.id.list);
         List<Sitio> data = Sitio.listAll(Sitio.class);
@@ -152,7 +165,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(this, "Selecionaste la posicion "+position, Toast.LENGTH_SHORT)
-                .show();
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        Toast.makeText(this, "Cargando nuevo contenido"
+                ,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        refresh.setRefreshing(false);
     }
 }
